@@ -10,7 +10,7 @@ auth = github.Auth.Token(TOKEN)
 gh = github.Github(auth=auth)
 
 # Get input
-ISSUE = os.getenv("ISSUE")
+ISSUE = int(os.getenv("ISSUE"))
 REPO = "jellyfin/jellyfin"
 
 # with open('strings.json', 'r', encoding='utf8') as stringsfile:
