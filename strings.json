@@ -1,0 +1,14 @@
+{
+    "header": "Hi, it seems like your issue report has the following item(s) that need to be addressed:",
+    "footer": "This is an automated message, please comment below if you believe this is incorrect.",
+    "empty_title": "The title of this issue report is empty. Please change it to something descriptive.",
+    "insufficient_logs": "You haven't provided a sufficient amount of logs according to the template.",
+    "invalid_template": "This bug report was not filed using the issue template.",
+    "old_version": "You are not running an up-to-date version of Jellyfin. Please update to the latest release.",
+    "environment_not_filled": "You have not filled in the environment completely.",
+    "environment_altered": "The format of the environment section has been altered from the template.",
+    "too_few_logs": "You have not provided a sufficient amount of logs. Please provide every line during the time of the event *plus 10 lines before and after*.",
+    "no_ffmpeg_log": "You have not provided any ffmpeg logs. They should be included if transcoding or remuxing.",
+    "invalid_ffmpeg_log": "You have not provided the ffmpeg log unaltered from the server. Please provide a valid ffmpeg log.",
+    "not_jellyfin_ffmpeg": "You are not using our custom ffmpeg fork. Compatibility is not gauranteed."
+}
