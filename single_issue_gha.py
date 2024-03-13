@@ -11,7 +11,7 @@ gh = github.Github(auth=auth)
 
 # Get input
 ISSUE = int(os.getenv("ISSUE"))
-REPO = os.getenv("REPO")
+REPO = os.getenv("GH_REPO")
 print(REPO)
 
 # with open('strings.json', 'r', encoding='utf8') as stringsfile:
