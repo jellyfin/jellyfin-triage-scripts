@@ -1,0 +1,2 @@
+# jellychan
+ jellyfin triage script
