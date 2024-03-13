@@ -86,6 +86,7 @@ def checkissue(i:github.Issue.Issue):
 
         # Make Comment
         comment_string.append('\n' + strings['footer'])
+        print(comment_string)
         if len(comment_string) > 2:
             comment_string = '\n'.join(comment_string)
             return comment_string
