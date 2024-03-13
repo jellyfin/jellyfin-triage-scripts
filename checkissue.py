@@ -12,9 +12,10 @@ with open('template_titles.json', 'r', encoding='utf8') as templatetitlesfile:
 with open('environment_titles.json', 'r', encoding='utf8') as envtitlesfile:
     env_titles = json.load(envtitlesfile)
 
+print(strings)
 
 def checkissue(i:github.Issue.Issue):
-        # Check for empty title
+    # Check for empty title
     comment_string = [strings['header']]
     if re.fullmatch('(\\[Issue\\]\\:) *', i.title):
         comment_string.append('- ' + strings['empty_title'])
@@ -86,7 +87,6 @@ def checkissue(i:github.Issue.Issue):
 
         # Make Comment
         comment_string.append('\n' + strings['footer'])
-        print(comment_string)
         if len(comment_string) > 2:
             comment_string = '\n'.join(comment_string)
             return comment_string
