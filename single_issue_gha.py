@@ -27,6 +27,7 @@ repo = gh.get_repo(REPO)
 issue = repo.get_issue(ISSUE)
         
 res = checkissue(issue)
+print(res)
 
 if res:
     issue.create_comment(res)
