@@ -10,5 +10,6 @@
     "too_few_logs": "You have not provided a sufficient amount of logs. Please provide every line during the time of the event *plus 10 lines before and after*.",
     "no_ffmpeg_log": "You have not provided any ffmpeg logs. They should be included if transcoding or remuxing.",
     "invalid_ffmpeg_log": "You have not provided the ffmpeg log unaltered from the server. Please provide a valid ffmpeg log.",
-    "not_jellyfin_ffmpeg": "You are not using our custom ffmpeg fork. Compatibility is not gauranteed."
+    "not_jellyfin_ffmpeg": "You are not using our custom ffmpeg fork. Compatibility is not gauranteed.",
+    "using_microsoft_iis": "You are using IIS, which is an unsupported environment."
 }
