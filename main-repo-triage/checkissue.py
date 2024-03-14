@@ -46,21 +46,27 @@ def checkissue(i:github.Issue.Issue):
         offset = 0
         altered = False
         filled = True
+        iis = False
         while line != '```':
             line = body[ptr + offset]
             if line.startswith(env_titles[offset]):
                 if len(line.strip()) == len(env_titles[offset]):
                     filled = False
                     break
+                elif 'iis' in line.lower():
+                    iis = True
                 offset += 1
             else:
                 altered = True
                 break
-
+        
         if altered:
             comment_string.append('- ' + strings['environment_altered'])
         elif not filled:
             comment_string.append('- ' + strings['environment_not_filled'])
+        
+        if iis:
+            comment_string.append('- ' + strings['using_microsoft_iis'])
         
         # Check Jellyfin Logs
         jflog_lines = 0
