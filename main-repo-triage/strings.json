@@ -11,5 +11,5 @@
     "no_ffmpeg_log": "You have not provided any ffmpeg logs. They should be included if transcoding or remuxing.",
     "invalid_ffmpeg_log": "You have not provided the ffmpeg log unaltered from the server. Please provide a valid ffmpeg log.",
     "not_jellyfin_ffmpeg": "You are not using our custom ffmpeg fork. Compatibility is not gauranteed.",
-    "using_microsoft_iis": "You are using IIS, which is an unsupported environment."
+    "using_microsoft_iis": "```UNSUPPORTED HOSTING ENVIRONMENT Microsoft Internet Information Services. The option to run Jellyfin on IIS is an unsupported and untested feature. Only use at your own discretion.```"
 }
