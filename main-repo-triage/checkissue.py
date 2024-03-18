@@ -15,9 +15,8 @@ with open('environment_titles.json', 'r', encoding='utf8') as envtitlesfile:
 def checkissue(i:github.Issue.Issue):
     # Check for empty title
     comment_string = [strings['header']]
-    print(comment_string)
-    print(i.title)
-    print(i.body)
+    print(f'[Debug] Title: {i.title}')
+    print(f'[Debug] Body:  {i.body}')
     if re.fullmatch('(\\[Issue\\]\\:) *', i.title):
         comment_string.append('- ' + strings['empty_title'])
     
@@ -92,11 +91,12 @@ def checkissue(i:github.Issue.Issue):
             # ffmpeg log not provided
             comment_string.append('- ' + strings['no_ffmpeg_log'])
 
-        # Make Comment
-        comment_string.append('\n' + strings['footer'])
-        if len(comment_string) > 2:
-            comment_string = '\n'.join(comment_string)
-            return comment_string
-        
-        else:
-            return None
+    # Make Comment
+    comment_string.append('\n' + strings['footer'])
+    print(f'[Debug] Raw Result: {comment_string}')
+    if len(comment_string) > 2:
+        comment_string = '\n'.join(comment_string)
+        return comment_string
+    
+    else:
+        return None
