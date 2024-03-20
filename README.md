@@ -1,6 +1,6 @@
 # Jellyfin Triage Scripts
 
-Part of the Jellyfin[https://jellyfin.org] project.
+Part of the [Jellyfin](https://jellyfin.org) project.
 
 ## What is this?
 
