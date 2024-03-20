@@ -1,6 +1,6 @@
 {
     "header": "Hi, it seems like your issue report has the following item(s) that need to be addressed:",
-    "footer": "This is an automated message, currently under testing. Please file an issue [here](https://github.com/felix920506/jellychan/issues) if you encounter any problems.",
+    "footer": "This is an automated message, currently under testing. Please file an issue [here](https://github.com/jellyfin/jellyfin-triage-scripts/issues) if you encounter any problems.",
     "empty_title": "The title of this issue report is empty. Please change it to something descriptive.",
     "insufficient_logs": "You haven't provided a sufficient amount of logs according to the template.",
     "invalid_template": "This bug report was not filed using the issue template.",
