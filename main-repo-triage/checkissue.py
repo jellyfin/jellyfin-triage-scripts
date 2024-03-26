@@ -42,11 +42,10 @@ def checkissue(i:github.Issue.Issue):
         # Check Environment Section
         ptr = body.index('### Environment') + 3
         line = body[ptr]
-        offset = 0
         altered = False
         filled = True
         iis = False
-        while line != '```':
+        for offset in range(len(env_titles)):
             line = body[ptr + offset]
             if line.startswith(env_titles[offset]):
                 if len(line.strip()) == len(env_titles[offset]):
