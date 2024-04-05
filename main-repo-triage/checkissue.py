@@ -75,7 +75,8 @@ def checkissue(i:github.Issue.Issue):
             ptr += 1
             
         if jflog_lines < 10:
-            comment_string.append('- ' + strings['too_few_logs'])
+            # comment_string.append('- ' + strings['too_few_logs'])
+            pass
 
         # Check ffmpeg logs
         ptr = body.index('### FFmpeg logs') + 2
@@ -88,7 +89,8 @@ def checkissue(i:github.Issue.Issue):
                 comment_string.append('- ' + strings['not_jellyfin_ffmpeg'])
         else:
             # ffmpeg log not provided
-            comment_string.append('- ' + strings['no_ffmpeg_log'])
+            # comment_string.append('- ' + strings['no_ffmpeg_log'])
+            pass
 
     # Make Comment
     comment_string.append('\n' + strings['footer'])
