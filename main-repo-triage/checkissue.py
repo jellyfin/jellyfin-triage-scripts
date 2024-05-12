@@ -36,7 +36,8 @@ def checkissue(i:github.Issue.Issue):
         # Check version
         ptr = body.index('### Jellyfin Version') + 2
         version = body[ptr]
-        if version not in ('Unstable (master branch)', '10.8.13'):
+        # TODO: use proper version checking and comparison
+        if version not in ('Unstable (master branch)', '10.9.0'):
             comment_string.append('- ' + strings['old_version'])
         
         # Check Environment Section
