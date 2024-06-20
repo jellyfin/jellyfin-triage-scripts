@@ -1,6 +1,7 @@
 import github
 import re
 import json
+import semver
 
 with open('strings.json', 'r', encoding='utf8') as stringsfile:
     strings = json.load(stringsfile)
@@ -37,8 +38,16 @@ def checkissue(i:github.Issue.Issue):
         ptr = body.index('### Jellyfin Version') + 2
         version = body[ptr]
         # TODO: use proper version checking and comparison
-        if version not in ('Unstable (master branch)', '10.9.0'):
-            comment_string.append('- ' + strings['old_version'])
+        # Check if running unstable
+        if version not in ('Master branch', 'Weekly unstable'):
+            try:
+                version = semver.Version.parse(version)
+                if version < semver.Version.parse('10.9.0'):
+                    comment_string.append('- ' + strings['old_version'])
+            except:
+                comment_string.append('- ' + strings['old_version'])
+
+
         
         # Check Environment Section
         ptr = body.index('### Environment') + 3
