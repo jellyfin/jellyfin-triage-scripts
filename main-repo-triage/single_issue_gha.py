@@ -30,5 +30,7 @@ issue = repo.get_issue(ISSUE)
 res = checkissue(issue)
 print(res)
 
-if res:
-    issue.create_comment(res)
+# Inhibit Until I have time to modify for new template
+
+# if res:
+#     issue.create_comment(res)
