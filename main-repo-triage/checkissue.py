@@ -114,4 +114,4 @@ def checkissue(i:github.Issue.Issue):
         return None
 
 def remove_top_checklist(i:github.Issue.Issue):
-    i.edit(body=i.body.splitlines()[8:].join('\n'))
+    i.edit(body='\n'.join(i.body.splitlines()[8:]))
