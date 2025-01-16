@@ -125,11 +125,14 @@ def remove_top_checklist(i:github.Issue.Issue):
         "- [X] This report addresses only a single issue; If you encounter multiple issues, kindly create separate reports for each one."
     ]
 
+    body_lower_lines = i.body.lower().splitlines()
     body_lines = i.body.splitlines()
 
     for line in LINES_LIST:
         try:
-            body_lines.remove(line)
+            idx = body_lower_lines.index(line.lower())
+            body_lower_lines.pop(idx)
+            body_lines.pop(idx)
         except:
             print(f'[DBG]: Line not found: "{line}"')
             break
