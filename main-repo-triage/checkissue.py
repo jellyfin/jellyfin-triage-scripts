@@ -1,6 +1,7 @@
 import github
 import re
 import json
+import semver
 
 import github.Issue
 
