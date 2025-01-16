@@ -9,10 +9,12 @@ TOKEN = os.getenv("GH_TOKEN")
 auth = github.Auth.Token(TOKEN)
 gh = github.Github(auth=auth)
 
+# see if testing environment
+TESTING = os.getenv("TESTING") == 'True'
+
 # Get input
 ISSUE = int(os.getenv("ISSUE"))
 REPO = os.getenv("GH_REPO")
-print(REPO)
 
 # with open('strings.json', 'r', encoding='utf8') as stringsfile:
 #     strings = json.load(stringsfile)
@@ -32,5 +34,5 @@ print(res)
 
 # Inhibit Until I have time to modify for new template
 
-# if res:
-#     issue.create_comment(res)
+if res and TESTING:
+    issue.create_comment(res)
