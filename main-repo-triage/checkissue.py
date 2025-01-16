@@ -1,7 +1,8 @@
 import github
 import re
 import json
-import semver
+
+import github.Issue
 
 with open('strings.json', 'r', encoding='utf8') as stringsfile:
     strings = json.load(stringsfile)
@@ -111,3 +112,6 @@ def checkissue(i:github.Issue.Issue):
     
     else:
         return None
+
+def remove_top_checklist(i:github.Issue.Issue):
+    i.edit(body=i.body.splitlines()[8:].join('\n'))

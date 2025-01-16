@@ -2,7 +2,7 @@ import github
 import datetime
 import os
 
-from checkissue import checkissue
+from checkissue import checkissue, remove_top_checklist
 
 # Read token
 TOKEN = os.getenv("GH_TOKEN")
@@ -32,5 +32,7 @@ print(res)
 
 # Inhibit Until I have time to modify for new template
 
-# if res:
-#     issue.create_comment(res)
+if res and TESTING:
+    issue.create_comment(res)
+
+remove_top_checklist(issue)
