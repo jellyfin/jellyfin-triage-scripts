@@ -33,6 +33,8 @@ print(res)
 # Inhibit Until I have time to modify for new template
 
 if res:
-    issue.create_comment(res)
+    pass
+    # issue.create_comment(res)
 
+print('[INF]: Removing checklist')
 remove_top_checklist(issue)
