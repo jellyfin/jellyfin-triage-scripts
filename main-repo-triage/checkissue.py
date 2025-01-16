@@ -131,8 +131,12 @@ def remove_top_checklist(i:github.Issue.Issue):
         try:
             body_lines.remove(line)
         except:
+            print(f'[DBG]: Line not found: "{line}"')
             break
+        else:
+            print(f'[DBG]: Found line "{line}"')
     else:
+        print(f'[INF]: Removing blank lines from top of template')
         while not body_lines[0]:
             body_lines.pop(0)
         i.edit(body='\n'.join(body_lines))
