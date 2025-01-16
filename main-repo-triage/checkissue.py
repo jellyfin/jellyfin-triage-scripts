@@ -17,7 +17,7 @@ def checkissue(i:github.Issue.Issue):
     # Check for empty title
     comment_string = [strings['header']]
     print(f'[Debug] Title: {i.title}')
-    print(f'[Debug] Body:  {i.body}')
+    # print(f'[Debug] Body:  {i.body}')
     if re.fullmatch('(\\[Issue\\]\\:) *', i.title):
         comment_string.append('- ' + strings['empty_title'])
     
@@ -37,19 +37,20 @@ def checkissue(i:github.Issue.Issue):
         ptr = 0
         
         # Check version
-        ptr = body.index('### Jellyfin Version') + 2
+        ptr = body.index("### Jellyfin Server version") + 2
         version = body[ptr]
-        # TODO: use proper version checking and comparison
         # Check if running unstable
-        if version not in ('Master branch', 'Weekly unstable'):
-            try:
-                version = semver.Version.parse(version)
-                if version < semver.Version.parse('10.9.0'):
-                    comment_string.append('- ' + strings['old_version'])
-            except:
-                comment_string.append('- ' + strings['old_version'])
+        # if version not in ('Master branch', 'Weekly unstable'):
+        #     try:
+        #         version = semver.Version.parse(version)
+        #         if version < semver.Version.parse('10.9.0'):
+        #             comment_string.append('- ' + strings['old_version'])
+        #     except:
+        #         comment_string.append('- ' + strings['old_version'])
 
-
+        # check old version
+        if version == "Older*":
+            comment_string.append('- ' + strings['old_version'])
         
         # Check Environment Section
         ptr = body.index('### Environment') + 3
@@ -96,7 +97,8 @@ def checkissue(i:github.Issue.Issue):
             # ffmpeg log provided, check if valid
             line = body[ptr + 8]
             if not line.startswith('ffmpeg version'):
-                comment_string.append('- ' + strings['invalid_ffmpeg_log'])
+                pass
+                # comment_string.append('- ' + strings['invalid_ffmpeg_log'])
             elif '-Jellyfin Copyright (c)' not in line:
                 comment_string.append('- ' + strings['not_jellyfin_ffmpeg'])
         else:
