@@ -24,7 +24,8 @@ def checkissue(i:github.Issue.Issue):
     # Check for template format
     format_correct = True
     for title in template_titles:
-        if title not in i.body:
+        body_lower = i.body.lower()
+        if title.lower() not in body_lower:
             print(f'[Debug] Heading "{title}" not found')
             format_correct = False
             break
