@@ -9,6 +9,9 @@ TOKEN = os.getenv("GH_TOKEN")
 auth = github.Auth.Token(TOKEN)
 gh = github.Github(auth=auth)
 
+# see if testing environment
+TESTING = True if os.getenv("TESTING") else False
+
 # Get input
 ISSUE = int(os.getenv("ISSUE"))
 REPO = os.getenv("GH_REPO")
