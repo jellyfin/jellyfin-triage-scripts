@@ -33,8 +33,8 @@ def checkissue(i: github.Issue.Issue):
     Returns
     -------
     Optional[str]
-        A comment string with feedback if the issue does not conform to guidelines, or None
-        if all checks pass.
+        A comment string  if the issue violates guidelines,
+        or None if all checks pass.
     """
 
     # Check for empty title
