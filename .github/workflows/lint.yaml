@@ -1,0 +1,33 @@
+name: Lint Triage Scripts
+
+on:
+  push:
+    branches:
+      - main
+      - testing
+  pull_request:
+    branches:
+      - main
+      - testing
+
+jobs:
+  lint:
+    strategy:
+      fail-fast: false
+      matrix:
+        py_version: ['3.9', '3.10', '3.11', '3.12', '3.13']
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.2
+
+      - name: Set up Python ${{ matrix.py_version }}
+        uses: actions/setup-python@v5.4.0
+        with:
+          python-version: ${{ matrix.py_version }}
+
+      - name: Install Ruff
+        run: pip install ruff
+
+      - name: Run Ruff lint check
+        run: ruff check .
