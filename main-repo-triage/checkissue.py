@@ -1,5 +1,6 @@
 import json  # noqa: D100
 import re
+from typing import Optional
 
 import github
 import github.Issue
@@ -16,7 +17,7 @@ with open('environment_titles.json', 'r', encoding='utf8') as envtitlesfile:
     env_titles = json.load(envtitlesfile)
 
 
-def checkissue(i: github.Issue.Issue):
+def checkissue(i: github.Issue.Issue) -> Optional[str]:
     """Validate a GitHub issue against template guidelines and version requirements.
 
     Inspect the issue's title and body to verify that all required sections are present
@@ -134,7 +135,7 @@ def checkissue(i: github.Issue.Issue):
         return None
 
 
-def remove_top_checklist(i: github.Issue.Issue):
+def remove_top_checklist(i: github.Issue.Issue) -> None:
     """Remove the top checklist from a GitHub issue.
 
     Search for and remove a predefined checklist from the top of the issue body.
