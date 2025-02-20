@@ -1,0 +1,43 @@
+# Sets the maximum line length for formatting and linting.
+line-length = 88
+
+# Defines the indentation width (4 spaces).
+indent-width = 4
+
+[lint]
+# Enforces the specified linting rules.
+# For detailed information on each rule, see: https://docs.astral.sh/ruff/rules/
+select = [
+    "E",    # All error codes.
+    "D",    # Missing documentation errors.
+    "N",    # Naming convention violations.
+    "F",    # Pyflakes checks (e.g., unused imports, undefined variables).
+    "I",    # isort import sorting rules.
+]
+ignore = [
+    "D203", # Ignore: one blank line before class definitions (conflicts with D211).
+    "D213", # Ignore: multi-line docstring start formatting (conflicts with D212).
+]
+
+
+# Allows Ruff to automatically fix all fixable issues.
+fixable = ["ALL"]
+
+[format]
+# Enforces spaces for indentation instead of tabs.
+indent-style = "space"
+
+# Ensures Ruff does not automatically remove trailing commas.
+skip-magic-trailing-comma = false
+
+# Uses the appropriate line endings based on the operating system.
+line-ending = "auto"
+
+# Enables formatting of code inside docstrings.
+docstring-code-format = true
+
+# Automatically adjusts line length for code blocks inside docstrings.
+docstring-code-line-length = "dynamic"
+
+# Enforce single quotes for string literals.
+quote-style = "single"
