@@ -1,5 +1,6 @@
+import os  # noqa: D100
+
 import github
-import os
 
 ISSUE_PREFIX = '[Issue]: '  # The space is intentional
 

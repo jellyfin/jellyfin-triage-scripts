@@ -1,9 +1,9 @@
-import github
+import json  # noqa: D100
 import re
-import json
-import semver
 
+import github
 import github.Issue
+import semver
 
 with open('strings.json', 'r', encoding='utf8') as stringsfile:
     strings = json.load(stringsfile)
@@ -47,7 +47,7 @@ def checkissue(i: github.Issue.Issue):
                 version = semver.Version.parse(version)
                 if version < semver.Version.parse('10.9.0'):
                     comment_string.append('- ' + strings['old_version'])
-            except:
+            except ValueError:
                 comment_string.append('- ' + strings['old_version'])
 
         # Check Environment Section
@@ -115,13 +115,13 @@ def checkissue(i: github.Issue.Issue):
 
 
 def remove_top_checklist(i: github.Issue.Issue):
-    LINES_LIST = [
+    LINES_LIST = [  # noqa: N806
         '### This issue respects the following points:',
-        '- [X] This is a **bug**, not a question or a configuration issue; Please visit our [forum or chat rooms](https://jellyfin.org/contact/) first to troubleshoot with volunteers, before creating a report.',
-        "- [X] This issue is **not** already reported on [GitHub](https://github.com/jellyfin/jellyfin/issues?q=is%3Aopen+is%3Aissue) _(I've searched it)_.",
-        "- [X] I'm using an up to date version of Jellyfin Server stable, unstable or master; We generally do not support previous older versions. If possible, please update to the latest version before opening an issue.",
-        "- [X] I agree to follow Jellyfin's [Code of Conduct](https://jellyfin.org/docs/general/community-standards.html#code-of-conduct).",
-        '- [X] This report addresses only a single issue; If you encounter multiple issues, kindly create separate reports for each one.',
+        '- [X] This is a **bug**, not a question or a configuration issue; Please visit our [forum or chat rooms](https://jellyfin.org/contact/) first to troubleshoot with volunteers, before creating a report.',  # noqa: E501
+        "- [X] This issue is **not** already reported on [GitHub](https://github.com/jellyfin/jellyfin/issues?q=is%3Aopen+is%3Aissue) _(I've searched it)_.",  # noqa: E501
+        "- [X] I'm using an up to date version of Jellyfin Server stable, unstable or master; We generally do not support previous older versions. If possible, please update to the latest version before opening an issue.",  # noqa: E501
+        "- [X] I agree to follow Jellyfin's [Code of Conduct](https://jellyfin.org/docs/general/community-standards.html#code-of-conduct).",  # noqa: E501
+        '- [X] This report addresses only a single issue; If you encounter multiple issues, kindly create separate reports for each one.',  # noqa: E501
     ]
 
     body_lower_lines = i.body.lower().splitlines()
@@ -132,13 +132,13 @@ def remove_top_checklist(i: github.Issue.Issue):
             idx = body_lower_lines.index(line.lower())
             body_lower_lines.pop(idx)
             body_lines.pop(idx)
-        except:
+        except (ValueError, IndexError):
             print(f'[DBG]: Line not found: "{line}"')
             break
         else:
             print(f'[DBG]: Found line "{line}"')
     else:
-        print(f'[INF]: Removing blank lines from top of template')
+        print('[INF]: Removing blank lines from top of template')
         while not body_lines[0]:
             body_lines.pop(0)
         i.edit(body='\n'.join(body_lines))

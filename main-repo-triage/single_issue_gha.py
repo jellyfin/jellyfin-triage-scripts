@@ -1,7 +1,6 @@
-import github
-import datetime
-import os
+import os  # noqa: D100
 
+import github
 from checkissue import checkissue, remove_top_checklist
 
 # Read token
