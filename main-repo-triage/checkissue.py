@@ -17,6 +17,26 @@ with open('environment_titles.json', 'r', encoding='utf8') as envtitlesfile:
 
 
 def checkissue(i: github.Issue.Issue):
+    """Validate a GitHub issue against template guidelines and version requirements.
+
+    Inspect the issue's title and body to verify that all required sections are present
+    (e.g., template titles, environment details, logs). Validate the version using
+    semantic versioning, check for template alterations, and verify ffmpeg log formats.
+    If discrepancies are found, return a formatted comment string with feedback;
+    otherwise, return None.
+
+    Parameters
+    ----------
+    i : github.Issue.Issue
+        The GitHub issue object to validate.
+
+    Returns
+    -------
+    Optional[str]
+        A comment string with feedback if the issue does not conform to guidelines, or None
+        if all checks pass.
+    """
+
     # Check for empty title
     comment_string = [strings['header']]
     print(f'[Debug] Title: {i.title}')
@@ -115,6 +135,18 @@ def checkissue(i: github.Issue.Issue):
 
 
 def remove_top_checklist(i: github.Issue.Issue):
+    """Remove the top checklist from a GitHub issue.
+
+    Search for and remove a predefined checklist from the top of the issue body.
+    After removal, trim any leading blank lines and update the issue body with the
+    cleaned text.
+
+    Parameters
+    ----------
+    i : github.Issue.Issue
+        The GitHub issue object from which to remove the checklist.
+    """
+
     LINES_LIST = [  # noqa: N806
         '### This issue respects the following points:',
         '- [X] This is a **bug**, not a question or a configuration issue; Please visit our [forum or chat rooms](https://jellyfin.org/contact/) first to troubleshoot with volunteers, before creating a report.',  # noqa: E501
