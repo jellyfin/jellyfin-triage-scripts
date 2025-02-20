@@ -5,13 +5,13 @@ import os
 from checkissue import checkissue, remove_top_checklist
 
 # Read token
-TOKEN = os.getenv("GH_TOKEN")
+TOKEN = os.getenv('GH_TOKEN')
 auth = github.Auth.Token(TOKEN)
 gh = github.Github(auth=auth)
 
 # Get input
-ISSUE = int(os.getenv("ISSUE"))
-REPO = os.getenv("GH_REPO")
+ISSUE = int(os.getenv('ISSUE'))
+REPO = os.getenv('GH_REPO')
 print(REPO)
 
 # with open('strings.json', 'r', encoding='utf8') as stringsfile:
@@ -26,7 +26,7 @@ print(REPO)
 
 repo = gh.get_repo(REPO)
 issue = repo.get_issue(ISSUE)
-        
+
 res = checkissue(issue)
 print(res)
 
