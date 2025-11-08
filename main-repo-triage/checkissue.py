@@ -1,5 +1,4 @@
 import json
-import re
 
 import github
 import github.Issue
@@ -41,18 +40,12 @@ def checkissue(i: github.Issue.Issue) -> str | None:
     comment_string = [strings["header"]]
     print(f"[Debug] Title: {i.title}")
     print(f"[Debug] Body:  {i.body}")
-    if re.fullmatch("(\\[Issue\\]\\:) *", i.title):
-        comment_string.append("- " + strings["empty_title"])
+    if i.title.strip().lower() == "[issue]:":
+        comment_string.append(f"- {strings['empty_title']}")
 
     # Check for template format
-    format_correct = True
-    for title in template_titles:
-        if title not in i.body:
-            format_correct = False
-            break
-
-    if not format_correct:
-        comment_string.append("- " + strings["invalid_template"])
+    if not all(title in i.body for title in template_titles):
+        comment_string.append(f"- {strings['invalid_template']}")
     else:
         body = i.body.splitlines()
         ptr = 0
@@ -66,9 +59,9 @@ def checkissue(i: github.Issue.Issue) -> str | None:
             try:
                 version = semver.Version.parse(version)
                 if version < semver.Version.parse("10.9.0"):
-                    comment_string.append("- " + strings["old_version"])
+                    comment_string.append(f"- {strings['old_version']}")
             except ValueError:
-                comment_string.append("- " + strings["old_version"])
+                comment_string.append(f"- {strings['old_version']}")
 
         # Check Environment Section
         ptr = body.index("### Environment") + 3
@@ -76,26 +69,24 @@ def checkissue(i: github.Issue.Issue) -> str | None:
         altered = False
         filled = True
         iis = False
-        for offset in range(len(env_titles)):
+        for offset, title in enumerate(env_titles):
             line = body[ptr + offset]
-            if line.startswith(env_titles[offset]):
-                if len(line.strip()) == len(env_titles[offset]):
-                    filled = False
-                    break
-                if "iis" in line.lower():
-                    iis = True
-                offset += 1
-            else:
+            if not line.startswith(title):
                 altered = True
                 break
+            if len(line.strip()) == len(title):
+                filled = False
+                break
+            if "iis" in line.lower():
+                iis = True
 
         if altered:
-            comment_string.append("- " + strings["environment_altered"])
+            comment_string.append(f"- {strings['environment_altered']}")
         elif not filled:
-            comment_string.append("- " + strings["environment_not_filled"])
+            comment_string.append(f"- {strings['environment_not_filled']}")
 
         if iis:
-            comment_string.append("- " + strings["using_microsoft_iis"])
+            comment_string.append(f"- {strings['using_microsoft_iis']}")
 
         # Check Jellyfin Logs
         jflog_lines = 0
@@ -115,9 +106,9 @@ def checkissue(i: github.Issue.Issue) -> str | None:
             # ffmpeg log provided, check if valid
             line = body[ptr + 8]
             if not line.startswith("ffmpeg version"):
-                comment_string.append("- " + strings["invalid_ffmpeg_log"])
+                comment_string.append(f"- {strings['invalid_ffmpeg_log']}")
             elif "-Jellyfin Copyright (c)" not in line:
-                comment_string.append("- " + strings["not_jellyfin_ffmpeg"])
+                comment_string.append(f"- {strings['not_jellyfin_ffmpeg']}")
         else:
             # ffmpeg log not provided
             # comment_string.append('- ' + strings['no_ffmpeg_log'])
@@ -159,15 +150,15 @@ def remove_top_checklist(i: github.Issue.Issue) -> None:
     body_lines = i.body.splitlines()
 
     for line in LINES_LIST:
-        try:
-            idx = body_lower_lines.index(line.lower())
+        line_lower = line.lower()
+        if line_lower in body_lower_lines:
+            idx = body_lower_lines.index(line_lower)
             body_lower_lines.pop(idx)
             body_lines.pop(idx)
-        except (ValueError, IndexError):
-            print(f'[DBG]: Line not found: "{line}"')
-            break
+            print(f"[DBG]: Found line '{line}'")
         else:
-            print(f'[DBG]: Found line "{line}"')
+            print(f"[DBG]: Line not found: '{line}'")
+            break
     else:
         print("[INF]: Removing blank lines from top of template")
         while not body_lines[0]:
