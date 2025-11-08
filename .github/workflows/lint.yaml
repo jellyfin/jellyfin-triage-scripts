@@ -11,23 +11,14 @@ on:
       - testing
 
 jobs:
-  lint:
-    strategy:
-      fail-fast: false
-      matrix:
-        py_version: ['3.12', '3.13']
+  ruff:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.3.0
+        uses: actions/checkout@v5
 
-      - name: Set up Python ${{ matrix.py_version }}
-        uses: actions/setup-python@v5.6.0
+      - name: Run Ruff (latest)
+        uses: astral-sh/ruff-action@v3
         with:
-          python-version: ${{ matrix.py_version }}
-
-      - name: Install Ruff
-        run: pip install ruff
-
-      - name: Run Ruff lint check
-        run: ruff check .
+          version: latest
