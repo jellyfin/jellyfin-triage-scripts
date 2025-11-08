@@ -7,14 +7,40 @@ indent-width = 4
 [lint]
 # Enforces the specified linting rules.
 # For detailed information on each rule, see: https://docs.astral.sh/ruff/rules/
-select = [
-    "E",    # All error codes.
-    "D1",    # Missing documentation errors.
-    "N",    # Naming convention violations.
-    "F",    # Pyflakes checks (e.g., unused imports, undefined variables).
-    "I",    # isort import sorting rules.
-]
+select = ["ALL"]
+ignore = [
+    # don't want to use
+    "ANN002", # Missing type annotation for *args
+    "ANN003", # Missing type annotation for **kwargs
+    "ANN401", # typing.Any not allowed
+    "B028", # warn without stacklevel
+    "COM812", # conflicts with formatter
+    "D", # enforce all documentation checkers
+    "DTZ", # enforce time zones in dates
+    "ERA001", # commented code - causes many false positives
+    "FBT003", # booleans for positional arguments (calling side)
+    "FIX002", # TODOs
+    "G004", # logging with f-strings
+    "INP001", # namespace packgage (often false positives)
+    "PD008", "PD009", # at/iat -> loc/iloc
+    "PD010", # unstack/pivot->pivot_table
+    "PD013", # stack->melt
+    "PLC0414", # useless import alias (for re-exporting)
+    "PLR0913", # too many arguments (we know it, yet sometimes it is ok)
+    "PT006", # pytest-parametrize-names-wrong-type (no strings in parametrize)
+    "PTH", # pathlib instead of os functions
+    "RET504", # Unnecessary assignment before `return` statement
+    "SIM300", # yoda condition (often false positives in df[df.x == y])
+    "T201", # print found
+    "T203", # pprint found
+    "TD002", # TODOs require an author
+    "TD003", # TODOs require an issue/ticket
+    "TD005", # TODOs missing description (does not allow a line break after "TODO:")
 
+    # Should be enabled at some point!
+    "PLR2004", # magic values
+    "C901", "PLR0912", "PLR0915", # code too complex
+]
 
 # Allows Ruff to automatically fix all fixable issues.
 fixable = ["ALL"]
@@ -36,4 +62,4 @@ docstring-code-format = true
 docstring-code-line-length = "dynamic"
 
 # Enforce single quotes for string literals.
-quote-style = "single"
+quote-style = "double"
