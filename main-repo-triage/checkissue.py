@@ -77,7 +77,7 @@ def checkissue(i: github.Issue.Issue) -> Optional[str]:
         altered = False
         filled = True
         iis = False
-        for offset in range(len(env_titles)):
+        for offset, title in enumerate(env_titles):
             line = body[ptr + offset]
             if line.startswith(env_titles[offset]):
                 if len(line.strip()) == len(env_titles[offset]):
@@ -89,6 +89,11 @@ def checkissue(i: github.Issue.Issue) -> Optional[str]:
             else:
                 altered = True
                 break
+            if len(line.strip()) == len(title):
+                filled = False
+                break
+            if "iis" in line.lower():
+                iis = True
 
         if altered:
             comment_string.append('- ' + strings['environment_altered'])
@@ -161,15 +166,15 @@ def remove_top_checklist(i: github.Issue.Issue) -> None:
     body_lines = i.body.splitlines()
 
     for line in LINES_LIST:
-        try:
-            idx = body_lower_lines.index(line.lower())
+        line_lower = line.lower()
+        if line_lower in body_lower_lines:
+            idx = body_lower_lines.index(line_lower)
             body_lower_lines.pop(idx)
             body_lines.pop(idx)
-        except (ValueError, IndexError):
-            print(f'[DBG]: Line not found: "{line}"')
-            break
+            print(f"[DBG]: Found line '{line}'")
         else:
-            print(f'[DBG]: Found line "{line}"')
+            print(f"[DBG]: Line not found: '{line}'")
+            break
     else:
         print('[INF]: Removing blank lines from top of template')
         while not body_lines[0]:
