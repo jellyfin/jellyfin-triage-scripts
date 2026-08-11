@@ -1,16 +1,16 @@
-import os  # noqa: D100
+import os
 
 import github
 from checkissue import checkissue, remove_top_checklist
 
 # Read token
-TOKEN = os.getenv('GH_TOKEN')
+TOKEN = os.getenv("GH_TOKEN")
 auth = github.Auth.Token(TOKEN)
 gh = github.Github(auth=auth)
 
 # Get input
-ISSUE = int(os.getenv('ISSUE'))
-REPO = os.getenv('GH_REPO')
+ISSUE = int(os.getenv("ISSUE"))
+REPO = os.getenv("GH_REPO")
 print(REPO)
 
 # with open('strings.json', 'r', encoding='utf8') as stringsfile:
@@ -35,5 +35,5 @@ if res:
     pass
     # issue.create_comment(res)
 
-print('[INF]: Removing checklist')
+print("[INF]: Removing checklist")
 remove_top_checklist(issue)
