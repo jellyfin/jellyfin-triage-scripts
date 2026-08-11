@@ -15,6 +15,7 @@ ignore = [
     "ANN401", # typing.Any not allowed
     "B028", # warn without stacklevel
     "COM812", # conflicts with formatter
+    "CPY001", # Copyright notice at top of file (we dont have that)
     "D", # enforce all documentation checkers
     "DTZ", # enforce time zones in dates
     "ERA001", # commented code - causes many false positives
