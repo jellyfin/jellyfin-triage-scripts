@@ -1,2 +1,2 @@
-PyGithub==2.9.1
+PyGithub==2.10.0
 semver==3.0.4
